@@ -42,7 +42,9 @@
             TBXMLElement *childElement = element->firstChild;
             while (childElement) {
                 BOOL stopLoop = NO;
-                id childHandlerOrHandlers = handlerOrHandlers[[TBXML elementName:childElement]];
+                NSString *elementName = [TBXML elementName:childElement];
+                elementName = [elementName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                id childHandlerOrHandlers = handlerOrHandlers[elementName];
                 if (!childHandlerOrHandlers) childHandlerOrHandlers = handlerOrHandlers[kAnyNode];
                 if (childHandlerOrHandlers) [TBXML handleElement:childElement handlers:childHandlerOrHandlers context:context stop:&stopLoop];
                 childElement = stopLoop?nil:childElement->nextSibling;
