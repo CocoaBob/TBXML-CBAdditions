@@ -55,14 +55,14 @@
 
 + (void)exportAttributes:(TBXMLAttribute *)attribute toDictionary:(NSMutableDictionary **)dictionary {
     while (attribute) {
-        (*dictionary)[[TBXML attributeName:attribute]] = [TBXML attributeValue:attribute];
+        [(*dictionary) setObject:[TBXML attributeValue:attribute] forKey:[TBXML attributeName:attribute]];
         attribute = attribute->next;
     }
 }
 
 + (void)exportElements:(TBXMLElement *)element toDictionary:(NSMutableDictionary **)dictionary {
     while (element) {
-        (*dictionary)[[TBXML elementName:element]] = [TBXML textForElement:element];
+        [(*dictionary) setObject:[TBXML textForElement:element] forKey:[TBXML elementName:element]];
         element = element->nextSibling;
     }
 }
